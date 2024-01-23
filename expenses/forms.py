@@ -6,6 +6,11 @@ class ExpenseSearchForm(forms.ModelForm):
 
     from_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     to_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    categories = forms.ModelMultipleChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
 
     class Meta:
         model = Expense
