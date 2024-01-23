@@ -28,6 +28,14 @@ class ExpenseListView(ListView):
             if categories:
                 queryset = queryset.filter(category__in=categories)
 
+            sort_by = form.cleaned_data.get('sort_by')
+            sort_order = form.cleaned_data.get('sort_order')
+
+            if sort_by and sort_order:
+                if sort_order == 'desc':
+                    sort_by = f'-{sort_by}'
+                queryset = queryset.order_by(sort_by)
+
         return super().get_context_data(
             form=form,
             object_list=queryset,
