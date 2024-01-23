@@ -7,16 +7,7 @@
 <form method="get" action="">
   {{form.as_p}}
 
-	<label for="from_date">From:</label>
-	<input type="date" id="from_date" name="from_date" value="{{ request.GET.from_date }}">
-
-	<label for="to_date">To:</label>
-	<input type="date" id="to_date" name="to_date" value="{{ request.GET.to_date }}">
-
-
-	<div>
-		<button type="submit">search</button>
-	</div>
+	<button type="submit">search</button>
 
 </form>
 <br>
