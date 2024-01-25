@@ -68,4 +68,17 @@
 	</tr>
   </tr>
 </table>
+
+<hr>
+<table border="1">
+  <caption>Summary per year-month</caption>
+  <tr>
+    {% for category, total in summary_per_month.items %}
+	<tr>
+		<td>{{category}}:</td>
+		<td>{{total|floatformat:2}}</td>
+	</tr>
+	{% endfor %}
+  </tr>
+</table>
 {% endblock %}
