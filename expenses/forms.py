@@ -17,9 +17,9 @@ class ExpenseSearchForm(forms.ModelForm):
         initial='date'
     )
     sort_order = forms.ChoiceField(
-        choices=[('asc', 'Ascending'), ('desc', 'Descending')],
+        choices=[('desc', 'Descending'), ('asc', 'Ascending')],
         required=False,
-        initial='asc'
+        initial='desc'
     )
 
     class Meta:

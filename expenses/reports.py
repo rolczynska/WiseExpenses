@@ -5,6 +5,8 @@ from collections import OrderedDict, defaultdict
 from django.db.models import Sum, Value
 from django.db.models.functions import Coalesce
 
+from .models import Expense
+
 
 def summary_per_category(queryset):
     return OrderedDict(sorted(
@@ -32,3 +34,14 @@ def summary_per_month(queryset):
         summary[year_month] += decimal.Decimal(expense['amount'])
 
     return dict(summary)
+
+
+def number_expenses_per_category():
+    all_expenses = Expense.objects.values('category', 'amount')
+
+    expenses_per_category = defaultdict(int)
+
+    for expense in all_expenses:
+        expenses_per_category[expense['category']] += 1
+
+    return dict(expenses_per_category)
