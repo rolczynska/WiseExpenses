@@ -9,10 +9,10 @@ class ExpenseListView(ListView):
     model = Expense
     paginate_by = 5
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        queryset = object_list if object_list is not None else self.object_list
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
         form = ExpenseSearchForm(self.request.GET)
+
         if form.is_valid():
             name = form.cleaned_data.get('name', '').strip()
             from_date = form.cleaned_data.get('from_date')
@@ -32,17 +32,18 @@ class ExpenseListView(ListView):
             sort_order = form.cleaned_data.get('sort_order')
 
             if sort_by and sort_order:
-                if sort_order == 'desc':
-                    sort_by = f'-{sort_by}'
+                sort_by = f'-{sort_by}' if sort_order == 'desc' else sort_by
                 queryset = queryset.order_by(sort_by)
 
-        return super().get_context_data(
-            form=form,
-            object_list=queryset,
-            summary_per_category=summary_per_category(queryset),
-            total_amount_spent=total_amount_spent(queryset),
-            summary_per_month=summary_per_month(queryset),
-            **kwargs)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = ExpenseSearchForm(self.request.GET)
+        context['summary_per_category'] = summary_per_category(self.object_list)
+        context['total_amount_spent'] = total_amount_spent(self.object_list)
+        context['summary_per_month'] = summary_per_month(self.object_list)
+        return context
 
 
 class CategoryListView(ListView):
