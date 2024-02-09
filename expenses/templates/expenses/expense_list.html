@@ -11,8 +11,8 @@
 
 </form>
 <br>
-<table border="1">
-	<caption>Expenses</caption>
+<table border="1" id="table-expenses">
+	<caption> Your Expenses</caption>
 	<thead>
 	  <tr>
 		<th>no.</th>
@@ -44,41 +44,63 @@
 	{% endfor %}
 	</tbody>
 </table>
-
 {% include "_pagination.html" %}
-<hr>
-<table border="1">
-  <caption>Summary per category</caption>
-  <tr>
-    {% for category, total in summary_per_category.items %}
-	<tr>
-		<td>{{category}}:</td>
-		<td>{{total|floatformat:2}}</td>
-	</tr>
-	{% endfor %}
-  </tr>
-</table>
+
 
 <hr>
-<table border="1">
-  <caption>Total amount spent</caption>
-  <tr>
-	<tr>
-		<td>{{total_amount_spent|floatformat:2}}</td>
-	</tr>
-  </tr>
-</table>
+<div class="inline-tables">
+	<table id="table-summary-category" class="table-small">
 
-<hr>
-<table border="1">
-  <caption>Summary per year-month</caption>
-  <tr>
-    {% for category, total in summary_per_month.items %}
-	<tr>
-		<td>{{category}}:</td>
-		<td>{{total|floatformat:2}}</td>
-	</tr>
-	{% endfor %}
-  </tr>
-</table>
+		<thead>
+		  <tr>
+			<th>category</th>
+			<th>summary per category</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			{% for category, total in summary_per_category.items %}
+			<tr>
+				<td>{{category}}:</td>
+				<td>{{total|floatformat:2}}</td>
+			</tr>
+			{% endfor %}
+		  </tr>
+		</tbody>
+	</table>
+
+	<table id="table-total" class="table-small">
+
+		<thead>
+		  <tr>
+			<th>total amount</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{total_amount_spent|floatformat:2}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table id="table-sum-month" class="table-small">
+
+		<thead>
+			<tr>
+				<th>category</th>
+				<th>summary per month</th>
+		  	</tr>
+		</thead>
+		<tbody>
+			<tr>
+			{% for category, total in summary_per_month.items %}
+				<tr>
+					<td>{{category}}:</td>
+					<td>{{total|floatformat:2}}</td>
+				</tr>
+			{% endfor %}
+		  	</tr>
+		</tbody>
+	</table>
+</div>
 {% endblock %}

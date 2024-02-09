@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+    <head>
       {% load static %}
       <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +16,23 @@
       <span class="navbar-toggler-icon"></span>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="{% url 'expenses:expense-list' %}">Expenses</a>
+          <a class="nav-item nav-link" href="{% url 'expenses:expense-list' %}">Expenses</a>
           <a class="nav-item nav-link" href="{% url 'expenses:category-list' %}">Categories</a>
         </div>
       </div>
      </nav>
 
     </header>
+    <div class="site-container">
     <div class="main-content">
     {% block content %}{% endblock %}
     </div>
+    </div>
   </body>
+      <footer class="footer">
+
+      </footer>
+
+</div>
+
 </html>

@@ -6,6 +6,7 @@ html {
         padding: 0;
         margin: 0;
         background-color: #c9c9bc;
+        height: 100%;
     }
     h1, caption {
         color: #6d7141;
@@ -39,6 +40,14 @@ html {
     header * {
         display: inline;
     }
+
+    header a {
+    font-size: 18px; /* Adjust the font size as needed */
+    padding: 10px 15px; /* Adds padding around the links for better spacing and clickability */
+    text-decoration: none; /* Optional: removes underline from links */
+    color: #6d7141; /* Example color; adjust as needed */
+}
+
     form {
         background-color: lightgrey;
         width: 300px;
@@ -48,6 +57,11 @@ html {
         margin-left: auto;
         margin-right: auto;
     }
+    .site-container {
+      display: grid;
+      grid-template-rows: auto 1fr auto; /* Header, content, footer */
+      min-height: 100vh; /* Full viewport height */
+    }
     .page-header {
         background-color: #244b8c;
         margin-top: 0;
@@ -56,7 +70,7 @@ html {
     }
 
     .main-content {
-        margin-top: 80px; /* Use this class on your main content container */
+        margin-top: 80px;
 }
 
     .page-header h1,
@@ -79,11 +93,15 @@ html {
     }
     table {
         border-collapse: collapse;
-        width: 70%;
+        width: auto;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
         padding-top: 20px;
+    }
+    table th, table td {
+        padding: 12px 15px;
     }
     th {
         background-color: #8b8d68;
@@ -96,6 +114,20 @@ html {
         background-color: #fff;
     }
 
+    .inline-tables {
+        display: flex;
+        justify-content: center; /* Ensures tables are centered */
+        flex-wrap: wrap;
+        gap: 10px; /* Manages space between tables */
+    }
+
+    .inline-tables table {
+        flex: 0 1 200px; /* Adjusts how tables grow and sets a more suitable initial size */
+        /* flex-grow: 0 - Tables won't grow larger than their content/max-width
+           flex-shrink: 1 - Allows tables to shrink if necessary
+           flex-basis: 200px - Sets an initial starting width, adjust as needed */
+        margin: 10px; /* Provides spacing around each table */
+    }
     .menu-page {
         background-color: #fffdd0;
         width:60%;
@@ -137,3 +169,13 @@ html {
         top: 2px;
         right: 15px;
     }
+
+    footer {
+  background-color: #e8e8e8;
+  padding: 10px 0;
+  height: 60px; /* Example fixed height */
+  text-align: center;
+  color: white;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding is included in the height calculation */
+}
