@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'expenses:category-create' %}">add</a>
+<h1>Your expenses categories</h1>
 
-<table border="1">
+<a href="{% url 'expenses:category-create' %}">add new category</a>
+<br>
+<div>
+	<table border="1">
 	<thead>
 		<tr>
 			<th>name</th>
@@ -27,5 +30,7 @@
 		</tr>
 		{% endfor %}
 	</tbody>
-</table>
+	</table>
+</div>
+
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<a href="{% url 'expenses:expense-create' %}">add</a>
+<h1>Filter your expenses</h1>
+<a href="{% url 'expenses:expense-create' %}">add new expense</a>
 
 <form method="get" action="">
   {{form.as_p}}
