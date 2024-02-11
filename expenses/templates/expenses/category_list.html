@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Your expenses categories</h1>
 
-<a href="{% url 'expenses:category-create' %}">add new category</a>
+<a href="{% url 'category-create' %}">add new category</a>
 <br>
 <div>
 	<table border="1" id="table-category" class="table-small">
@@ -24,8 +24,8 @@
 				{{obj.counter}}
 			</td>
 			<td>
-				<a href="{% url 'expenses:category-edit' obj.id %}">edit</a>
-				<a href="{% url 'expenses:category-delete' obj.id %}">delete</a>
+				<a href="{% url 'category-edit' obj.id %}">edit</a>
+				<a href="{% url 'category-delete' obj.id %}">delete</a>
 			</td>
 		</tr>
 		{% endfor %}

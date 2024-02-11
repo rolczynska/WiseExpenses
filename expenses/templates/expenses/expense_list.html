@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Filter your expenses</h1>
-<a href="{% url 'expenses:expense-create' %}">add new expense</a>
+<div class="form-container">
+	<h1>Your daily expenses</h1>
+	<a href="{% url 'expense-create' %}">add new expense</a>
+	<h2>Filter your expenses</h2>
+	<form method="get" action="">
+	  	{{form.as_p}}
+		<button type="submit">search</button>
 
-<form method="get" action="">
-  {{form.as_p}}
+	</form>
+</div>
 
-	<button type="submit">search</button>
-
-</form>
 <br>
+<h1>All your expenses</h1>
 <table border="1" id="table-expenses">
-	<caption> Your Expenses</caption>
 	<thead>
 	  <tr>
 		<th>no.</th>
@@ -33,8 +35,8 @@
 		<td>{{ obj.amount|floatformat:2 }}</td>
 		<td>{{obj.date}}</td>
 		<td>
-		  <a href="{% url 'expenses:expense-edit' obj.id %}">edit</a>
-		  <a href="{% url 'expenses:expense-delete' obj.id %}">delete</a>
+		  <a href="{% url 'expense-edit' obj.id %}">edit</a>
+		  <a href="{% url 'expense-delete' obj.id %}">delete</a>
 		</td>
 	  </tr>
 	  {% empty %}
@@ -48,6 +50,8 @@
 
 
 <hr>
+<h1>Reports</h1>
+
 <div class="inline-tables">
 	<table id="table-summary-category" class="table-small">
 
@@ -87,15 +91,15 @@
 
 		<thead>
 			<tr>
-				<th>category</th>
+				<th>date of expense</th>
 				<th>summary per month</th>
 		  	</tr>
 		</thead>
 		<tbody>
 			<tr>
-			{% for category, total in summary_per_month.items %}
+			{% for date, total in summary_per_month.items %}
 				<tr>
-					<td>{{category}}:</td>
+					<td>{{date}}:</td>
 					<td>{{total|floatformat:2}}</td>
 				</tr>
 			{% endfor %}

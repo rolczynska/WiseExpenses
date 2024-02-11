@@ -1,12 +1,17 @@
+from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from django.contrib.auth import logout
 
-from .forms import ExpenseSearchForm
+from .forms import ExpenseSearchForm, SignUpForm
 from .models import Expense, Category
 from .reports import summary_per_category, summary_per_month, total_amount_spent, \
                     number_expenses_per_category
 
 
-class ExpenseListView(ListView):
+class ExpenseListView(LoginRequiredMixin, ListView):
     model = Expense
     paginate_by = 5
 
@@ -47,7 +52,7 @@ class ExpenseListView(ListView):
         return context
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     paginate_by = 5
 
@@ -58,3 +63,14 @@ class CategoryListView(ListView):
             category.counter = counter_expenses.get(category.id, 0)
 
         return context
+
+
+class SignUpView(CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")

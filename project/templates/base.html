@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 
     <head>
-      {% load static %}
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>{% block meta_title %}Expenses app{% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <span class="navbar-toggler-icon"></span>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="{% url 'expenses:expense-list' %}">Expenses</a>
-          <a class="nav-item nav-link" href="{% url 'expenses:category-list' %}">Categories</a>
-        </div>
-      </div>
-     </nav>
 
-    </header>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>{% block meta_title %}Expenses app{% endblock %}</title>
+    </head>
+
+    <body>
+        <header id="header" class="header_container">
+            <nav class="navbar">
+                {% if user.is_authenticated %}
+                <div class="flex-container2">
+                    <a class="nav-item nav-link" href="{% url 'expense-list' %}">Expenses</a>
+                    <a class="nav-item nav-link" href="{% url 'category-list' %}">Categories</a>
+                </div>
+                    <div class="flex-container">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button">Logout</button>
+                        </form>
+                    </div>
+
+
+                {% else %}
+                <div class="flex-container">
+                    <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                </div>
+              {% endif %}
+            </nav>
+
+        </header>
     <div class="site-container">
     <div class="main-content">
     {% block content %}{% endblock %}
     </div>
     </div>
-  </body>
+    </body>
       <footer class="footer">
 
       </footer>
