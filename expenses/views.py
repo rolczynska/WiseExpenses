@@ -14,6 +14,7 @@ class ExpenseListView(LoginRequiredMixin, ListView):
     paginate_by = 5
 
     def get_queryset(self):
+        # Filter expenses to those belonging to the logged-in user and apply search criteria.
         queryset = Expense.objects.filter(user=self.request.user)
         form = ExpenseSearchForm(self.request.GET, user=self.request.user)
 
@@ -56,13 +57,13 @@ class ExpensesCreateView(CreateView):
     success_url = reverse_lazy('expense-list')
     template_name = "generic_update.html"
 
-    # Set logged user as form.instance.user
     def form_valid(self, form):
+        # Link the expense to the logged-in user.
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    # Ensure that option to choose category will be only listed from those which this user created
     def get_form(self, form_class=None):
+        # Limit category choices to those created by the logged-in user.
         form = super(ExpensesCreateView, self).get_form(form_class)
         form.fields['category'].queryset = Category.objects.filter(user=self.request.user)
         return form
@@ -73,6 +74,7 @@ class CategoryListView(LoginRequiredMixin, ListView):
     paginate_by = 5
 
     def get_queryset(self):
+        # Filter categories to those belonging to the logged-in user.
         return Category.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
@@ -91,6 +93,7 @@ class CategoryCreateView(CreateView):
     template_name = "generic_update.html"
 
     def form_valid(self, form):
+        # Link the category to the logged-in user.
         form.instance.user = self.request.user
         return super().form_valid(form)
 
