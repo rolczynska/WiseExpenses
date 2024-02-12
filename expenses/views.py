@@ -15,7 +15,7 @@ class ExpenseListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = Expense.objects.filter(user=self.request.user)
-        form = ExpenseSearchForm(self.request.GET)
+        form = ExpenseSearchForm(self.request.GET, user=self.request.user)
 
         if form.is_valid():
             name = form.cleaned_data.get('name', '').strip()
@@ -43,7 +43,7 @@ class ExpenseListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = ExpenseSearchForm(self.request.GET)
+        context['form'] = ExpenseSearchForm(self.request.GET, user=self.request.user)
         context['summary_per_category'] = summary_per_category(self.object_list)
         context['total_amount_spent'] = total_amount_spent(self.object_list)
         context['summary_per_month'] = summary_per_month(self.object_list)
