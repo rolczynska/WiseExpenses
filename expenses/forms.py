@@ -28,9 +28,11 @@ class ExpenseSearchForm(forms.ModelForm):
         model = Expense
         fields = ('name',)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].required = False
+        if user is not None:
+            self.fields['categories'].queryset = Category.objects.filter(user=user)
 
 
 class SignUpForm(UserCreationForm):
