@@ -48,6 +48,15 @@ html {
         text-decoration: none; /* Optional: removes underline from links */
         color: #6d7141; /* Example color; adjust as needed */
     }
+    footer {
+         background-color: #e8e8e8;
+         padding: 10px 0;
+         height: 60px;
+         text-align: center;
+         color: white;
+         width: 100%;
+         box-sizing: border-box;
+    }
 
     .site-container {
       display: grid;
@@ -168,19 +177,23 @@ html {
         color: #6d7141; /* Example color; adjust as needed */
         cursor: pointer;
         margin: 10px 15px;
+        border-top-width: 2px;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-top-style: outset;
+        border-right-style: outset;
+        border-bottom-style: outset;
+        border-left-style: outset;
+        border-top-color: buttonface;
+        border-right-color: buttonface;
+        border-bottom-color: buttonface;
+        border-left-color: buttonface;
+        background-color: buttonface;
+        box-sizing: border-box;
     }
     .user-name {
         position: absolute;
         top: 2px;
         right: 15px;
-    }
-
-    footer {
-      background-color: #e8e8e8;
-      padding: 10px 0;
-      height: 60px; /* Example fixed height */
-      text-align: center;
-      color: white;
-      width: 100%;
-      box-sizing: border-box; /* Ensures padding is included in the height calculation */
     }
