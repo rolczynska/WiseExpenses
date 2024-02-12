@@ -1,20 +1,16 @@
-from django.views.generic import CreateView, UpdateView, DeleteView, RedirectView
+from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, reverse_lazy
 from .models import Expense, Category
-from .views import ExpenseListView, CategoryListView, SignUpView
+from .views import ExpenseListView, CategoryListView, SignUpView, ExpensesCreateView, \
+    CategoryCreateView
 
 urlpatterns = [
     path('expense/list/',
          ExpenseListView.as_view(),
          name='expense-list'),
     path('expense/create/',
-         CreateView.as_view(
-             model=Expense,
-             fields='__all__',
-             success_url=reverse_lazy('expense-list'),
-             template_name='generic_update.html'
-         ),
+         ExpensesCreateView.as_view(),
          name='expense-create'),
     path('expense/<int:pk>/edit/',
          UpdateView.as_view(
@@ -36,12 +32,7 @@ urlpatterns = [
          CategoryListView.as_view(),
          name='category-list'),
     path('category/create/',
-         CreateView.as_view(
-             model=Category,
-             fields='__all__',
-             success_url=reverse_lazy('category-list'),
-             template_name='generic_update.html'
-         ),
+         CategoryCreateView.as_view(),
          name='category-create'),
     path('category/<int:pk>/edit/',
          UpdateView.as_view(

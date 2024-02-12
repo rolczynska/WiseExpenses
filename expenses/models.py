@@ -1,11 +1,13 @@
 import datetime
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
     class Meta:
         ordering = ('name',)
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
@@ -16,8 +18,9 @@ class Expense(models.Model):
     class Meta:
         ordering = ('-date', '-pk')
 
-    category = models.ForeignKey(Category, models.PROTECT, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
+    category = models.ForeignKey(Category, models.PROTECT, null=True, blank=True)
     name = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
 

@@ -1,9 +1,7 @@
-from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from django.contrib.auth import logout
 
 from .forms import ExpenseSearchForm, SignUpForm
 from .models import Expense, Category
@@ -16,7 +14,7 @@ class ExpenseListView(LoginRequiredMixin, ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = Expense.objects.filter(user=self.request.user)
         form = ExpenseSearchForm(self.request.GET)
 
         if form.is_valid():
@@ -52,9 +50,30 @@ class ExpenseListView(LoginRequiredMixin, ListView):
         return context
 
 
+class ExpensesCreateView(CreateView):
+    model = Expense
+    fields = ['name', 'amount', 'category', 'date']
+    success_url = reverse_lazy('expense-list')
+    template_name = "generic_update.html"
+
+    # Set logged user as form.instance.user
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    # Ensure that option to choose category will be only listed from those which this user created
+    def get_form(self, form_class=None):
+        form = super(ExpensesCreateView, self).get_form(form_class)
+        form.fields['category'].queryset = Category.objects.filter(user=self.request.user)
+        return form
+
+
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     paginate_by = 5
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,12 +84,18 @@ class CategoryListView(LoginRequiredMixin, ListView):
         return context
 
 
+class CategoryCreateView(CreateView):
+    model = Category
+    fields = ['name']
+    success_url = reverse_lazy('category-list')
+    template_name = "generic_update.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
 class SignUpView(CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
-
-
-def logout_view(request):
-    logout(request)
-    return redirect("home")
