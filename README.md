@@ -1,6 +1,8 @@
 # WiseExpenses 💸
 
 WiseExpenses is a web application built with the Django framework, designed to help users manage their expenses efficiently. This application allows users to sign up, log in, and track their expenses.
+## Video Demo
+https://github.com/rolczynska/WiseExpenses/assets/90453267/19bbafbe-652d-48a5-b6ae-821bea7a3220
 
 ## Features 🌟
 
