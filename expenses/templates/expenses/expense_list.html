@@ -11,7 +11,7 @@
     <br>
 
     <div class="add-container">
-        <a href="{% url 'expense-create' %}" class="button">add new expense</a>
+        <a href="{% url 'expense-create' %}" class="button-add">Add new expense</a>
     </div>
 
     <br>
@@ -27,9 +27,9 @@
 
     <br>
 
-    <div>
+    <div class="table-responsive">
+        <h1>Your expenses</h1>
         <table border="1" id="table-expenses">
-            <h1>Your expenses</h1>
             <thead>
             <tr>
                 <th>no.</th>
@@ -77,12 +77,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
             {% for category, total in summary_per_category.items %}
         <tr>
             <td>{{category}}:</td>
             <td>{{total|floatformat:2}}</td>
-        </tr>
         </tr>
         {% empty %}
         <tr>
@@ -121,7 +119,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
             {% for date, total in summary_per_month.items %}
         <tr>
             <td>{{date}}:</td>
@@ -132,7 +129,6 @@
             <td colspan="5">no items</td>
         </tr>
         {% endfor %}
-        </tr>
         </tbody>
     </table>
 </div>

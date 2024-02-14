@@ -5,30 +5,29 @@ html {
     body, html {
         padding: 0;
         margin: 0;
-        background-color: #c9c9bc;
+        background-color: #F1EFEF;
         height: 100%;
     }
     h1, caption {
-        color: #6d7141;
+        color: #191717;
         font-weight: bold;
         align: center;
     }
     h2, span {
-        color: #6d7141;
+        color: #191717;
         font-family: 'Roboto', sans-serif;
 
     }
     h3 {
-        color: #e8e8e8
+        color: #B4B4B8
     }
 
     a {
-        color: #6d7141;
-
+        color: #191717;
     }
 
      header {
-        background-color: #e8e8e8;
+        background-color: #7D7C7C;
         position: fixed;
         top: 0;
         left: 0;
@@ -46,7 +45,8 @@ html {
         font-size: 18px; /* Adjust the font size as needed */
         padding: 10px 15px; /* Adds padding around the links for better spacing and clickability */
         text-decoration: none; /* Optional: removes underline from links */
-        color: #6d7141; /* Example color; adjust as needed */
+        color: #F1EFEF; /* Example color; adjust as needed */
+        font-weight: bold;
     }
     footer {
          background-color: #e8e8e8;
@@ -116,8 +116,8 @@ html {
         padding: 12px 15px;
     }
     th {
-        background-color: #8b8d68;
-        color: #e8e8e8;
+        background-color: #7D7C7C;
+        color: #F1EFEF;
     }
     tr:nth-child(even) {
         background-color: #eee;
@@ -125,7 +125,9 @@ html {
     tr:nth-child(odd) {
         background-color: #fff;
     }
-
+    .table-responsive {
+        overflow-x: auto;
+    }
     .navbar {
           display: flex;
           justify-content: space-between;
@@ -174,7 +176,7 @@ html {
         font-size: 18px; /* Adjust the font size as needed */
         padding: 10px 15px; /* Adds padding around the links for better spacing and clickability */
         text-decoration: none; /* Optional: removes underline from links */
-        color: #6d7141; /* Example color; adjust as needed */
+        color: #7D7C7C; /* Example color; adjust as needed */
         cursor: pointer;
         margin: 10px 15px;
         border-top-width: 2px;
@@ -189,7 +191,29 @@ html {
         border-right-color: buttonface;
         border-bottom-color: buttonface;
         border-left-color: buttonface;
-        background-color: buttonface;
+        background-color: #F1EFEF;
+        box-sizing: border-box;
+    }
+    .button-add {
+        font-size: 18px; /* Adjust the font size as needed */
+        padding: 10px 15px; /* Adds padding around the links for better spacing and clickability */
+        text-decoration: none; /* Optional: removes underline from links */
+        color: #F1EFEF; /* Example color; adjust as needed */
+        cursor: pointer;
+        margin: 10px 15px;
+        border-top-width: 2px;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-top-style: outset;
+        border-right-style: outset;
+        border-bottom-style: outset;
+        border-left-style: outset;
+        border-top-color: buttonface;
+        border-right-color: buttonface;
+        border-bottom-color: buttonface;
+        border-left-color: buttonface;
+        background-color: #7D7C7C;
         box-sizing: border-box;
     }
     .user-name {
